@@ -9,15 +9,23 @@ namespace HotelWebApp.Models
     public class Reservation
     {
         public int ID { get; set; }
+        private string _ReservationNumber;
+
+        public string ShowReservationNumber
+        {
+            get { return $"{RoomID}-{CustomerID}-{CheckIn.Day}-{CheckOut.Day}"; }
+            set { ReservationNumber = value; }
+        }
+
         public string ReservationNumber
         {
             get
             {
-                return $"{RoomID}-{CustomerID}-{CheckIn.Day}-{CheckOut.Day}";
+                return _ReservationNumber;
             }
             set
             {
-                ReservationNumber = $"{RoomID}-{CustomerID}-{CheckIn.Day}-{CheckOut.Day}";
+                _ReservationNumber = value;
             }
         }
 

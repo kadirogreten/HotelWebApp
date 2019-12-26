@@ -12,6 +12,7 @@ namespace HotelWebApp.Models
         //public string RoomNumber { get; set; }
         public int Floor { get; set; }
         public bool IsAvailable { get; set; } = false;
+        
         public DateTime? AvailableDate { get; set; }
 
         public ICollection<Reservation> Reservations { get; set; }

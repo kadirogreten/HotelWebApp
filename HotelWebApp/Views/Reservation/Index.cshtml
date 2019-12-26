@@ -9,16 +9,22 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+
+<div class="text-center text-info">
+    @ViewBag.StatusMessage
+</div>
+
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Customer.NameSurname)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Room.RoomNumber)
+            @Html.DisplayNameFor(model => model.Room.ShowRoomNumber)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ReservationNumber)
+            @Html.DisplayNameFor(model => model.ShowReservationNumber)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CheckIn)
@@ -38,10 +44,10 @@
             @Html.DisplayFor(modelItem => item.Customer.NameSurname)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Room.RoomNumber)
+            @Html.DisplayFor(modelItem => item.Room.ShowRoomNumber)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ReservationNumber)
+            @Html.DisplayFor(modelItem => item.ShowReservationNumber)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CheckIn)

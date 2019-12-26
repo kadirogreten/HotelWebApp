@@ -15,9 +15,12 @@ namespace HotelWebApp.Controllers
         private HotelDbContext db = new HotelDbContext();
 
         // GET: Reservation
-        public ActionResult Index()
+        public ActionResult Index(MessageId? message)
         {
             var reservation = db.Reservation.Include(r => r.Customer).Include(r => r.Room);
+            ViewBag.StatusMessage = message == MessageId.Success ? "Ekleme Başarılı" :
+               message == MessageId.Error ? "Beklenmedik bir hata gerçekleşti!" :
+               "";
             return View(reservation.ToList());
         }
 
@@ -39,8 +42,11 @@ namespace HotelWebApp.Controllers
         // GET: Reservation/Create
         public ActionResult Create()
         {
+
+           
+
             ViewBag.CustomerID = new SelectList(db.Customer, "ID", "NameSurname");
-            ViewBag.RoomID = new SelectList(db.Room, "ID", "RoomNumberShow");
+            ViewBag.RoomID = new SelectList(db.Room, "ID", "ShowRoomNumber");
             return View();
         }
 
@@ -49,17 +55,50 @@ namespace HotelWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ReservationNumber,CheckIn,CheckOut,IsComplete,CustomerID,RoomID")] Reservation reservation)
+        public ActionResult Create([Bind(Include = "ID,ReservationNumber,CheckIn,CheckOut,IsComplete,CustomerID,RoomID,ShowReservationNumber")] Reservation reservation)
         {
+
+            MessageId message;
+
             if (ModelState.IsValid)
             {
-                db.Reservation.Add(reservation);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                //var result = db.Reservation.Where(entry => entry.CheckIn >= minDate
+                // && entry.CheckOut <= maxDate).ToList();
+                var availableRooms = db.Room.Where(m => m.Reservations.All(r => r.CheckOut <= reservation.CheckIn || r.CheckIn >= reservation.CheckOut)).ToList();
+
+                var room = availableRooms.Any(a => a.ID == reservation.RoomID);
+
+                if (room == true)
+                {
+
+                    reservation.IsComplete = true;
+                    db.Reservation.Add(reservation);
+                    
+                    db.SaveChanges();
+
+                    message = MessageId.Success;
+
+                    return RedirectToAction("Index", new { Message = message});
+                }
+                else
+                {
+                    ViewBag.CustomerID = new SelectList(db.Customer, "ID", "NameSurname", reservation.CustomerID);
+                    ViewBag.RoomID = new SelectList(db.Room, "ID", "ShowRoomNumber", reservation.RoomID);
+
+                    var roomName = db.Room.Where(a => a.ID == reservation.RoomID).FirstOrDefault();
+                    ViewBag.Message = $"Seçtiğiniz {roomName.ShowRoomNumber} oda bu tarihler arasında müsait değildir!";
+
+
+                    return View(reservation);
+                }
+
+
+
             }
 
             ViewBag.CustomerID = new SelectList(db.Customer, "ID", "NameSurname", reservation.CustomerID);
-            ViewBag.RoomID = new SelectList(db.Room, "ID", "RoomNumber", reservation.RoomID);
+            ViewBag.RoomID = new SelectList(db.Room, "ID", "ShowRoomNumber", reservation.RoomID);
             return View(reservation);
         }
 
@@ -85,7 +124,7 @@ namespace HotelWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ReservationNumber,CheckIn,CheckOut,IsComplete,CustomerID,RoomID")] Reservation reservation)
+        public ActionResult Edit([Bind(Include = "ID,ReservationNumber,CheckIn,CheckOut,IsComplete,CustomerID,RoomID,ShowReservationNumber")] Reservation reservation)
         {
             if (ModelState.IsValid)
             {
@@ -132,5 +171,18 @@ namespace HotelWebApp.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+      
+
     }
+
+    #region Helper 
+    public enum MessageId
+    {
+        Success,
+        Error
+    }
+
+    #endregion
 }
