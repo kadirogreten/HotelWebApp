@@ -14,5 +14,6 @@ namespace HotelWebApp.Models
         public DbSet<Reservation> Reservation { get; set; }
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Room> Room { get; set; }
+        public DbSet<Slider> Slider { get; set; }
     }
 }
