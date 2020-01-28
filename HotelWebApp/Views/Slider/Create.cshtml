@@ -2,45 +2,95 @@
 
 @{
     ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Panel.cshtml";
 }
 
-<h2>Create</h2>
 
 
-@using (Html.BeginForm("create", "slider", FormMethod.Post, new { enctype="multipart/form-data"}))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Slider</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.FileName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="file" name="file" required/>
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>General Form</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">General Form</li>
+                </ol>
             </div>
         </div>
+    </div><!-- /.container-fluid -->
+</section>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Row, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Row, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Row, "", new { @class = "text-danger" })
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Slider oluştur</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+
+
+                    @using (Html.BeginForm("create", "slider", FormMethod.Post, new { enctype = "multipart/form-data", role = "form" }))
+                    {
+
+                        @Html.AntiForgeryToken()
+                        <div class="card-body">
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Title 1</label>
+                                @Html.EditorFor(model => model.Title_1, new { htmlAttributes = new { @class = "form-control", id = "exampleInputEmail1" } })
+                                @Html.ValidationMessageFor(model => model.Title_1, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Title 2</label>
+                                @Html.EditorFor(model => model.Title_2, new { htmlAttributes = new { @class = "form-control", id = "exampleInputPassword1" } })
+                                @Html.ValidationMessageFor(model => model.Title_2, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword2">Row</label>
+                                @Html.EditorFor(model => model.Row, new { htmlAttributes = new { @class = "form-control", id = "exampleInputPassword2" } })
+                                @Html.ValidationMessageFor(model => model.Row, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile">File input</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input class="custom-file-input" name="file" id="exampleInputFile" type="file">
+                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Upload</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                        </div>
+                    }
+
+                </div>
+                <!-- /.card -->
+
+
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
         </div>
-    </div>
-}
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

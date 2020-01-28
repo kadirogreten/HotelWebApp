@@ -22,7 +22,7 @@ namespace HotelWebApp.Controllers
         public ActionResult Index(MessageId? message)
         {
             ViewBag.StatusMessage = message == MessageId.Success ? "Slider ekleme başarılı" :
-                message == MessageId.Error ? "Beklenmedik bir hata oluştu!" : "";
+                message == MessageId.Error ? "Beklenmedik bir hata oluştu! dosya formatı sadece resim dosyası olmalıdır ve 2 mb geçmemelidir!" : "";
 
             return View(db.Slider.ToList());
         }
@@ -53,7 +53,7 @@ namespace HotelWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FileName,Row")] Slider slider,HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "ID,FileName,Row,Title_1,Title_2")] Slider slider,HttpPostedFileBase file)
         {
 
             MessageId message;
@@ -71,7 +71,7 @@ namespace HotelWebApp.Controllers
                     if (extension.Contains("pdf") || extension.Contains("doc") || extension.Contains("docx"))
                     {
                         message = MessageId.Error;
-                        return View("index",new {Message = message });
+                        return RedirectToAction("index",new {Message = message });
                     }else
                     {
                         fileName = Guid.NewGuid() + extension;
@@ -82,14 +82,16 @@ namespace HotelWebApp.Controllers
                     db.Slider.Add(new Slider
                     {
                         FileName = "/Content/slider/" + fileName,
-                        Row = slider.Row
+                        Row = slider.Row,
+                        Title_1 = slider.Title_1,
+                        Title_2 = slider.Title_2
                     });
                    
 
                 }else
                 {
                     message = MessageId.Error;
-                    return View("index", new { Message = message });
+                    return RedirectToAction("index", new { Message = message });
                 }
 
                 db.SaveChanges();
@@ -120,7 +122,7 @@ namespace HotelWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FileName,Row")] Slider slider)
+        public ActionResult Edit([Bind(Include = "ID,FileName,Row,Title_1,Title_2")] Slider slider)
         {
             if (ModelState.IsValid)
             {
