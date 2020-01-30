@@ -92,10 +92,9 @@
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Panel<span class="caret"></span></a>
                                         <ul class="dropdown-menu" role="menu">
                                             <li><a href="@Url.Action("create","slider")">Slider</a></li>
-                                            <li><a href=#>Drop Down 2</a></li>
-                                            <li><a href=#>Drop Down 2</a></li>
-                                            <li><a href=#>Drop Down 2</a></li>
-                                            <li><a href=#>Drop Down 2</a></li>
+                                            <li><a href="@Url.Action("create","customer")">Customer</a></li>
+                                            <li><a href="@Url.Action("create","room")">Room</a></li>
+                                            <li><a href="@Url.Action("create","reservation")">Reservation</a></li>
                                         </ul>
                                     </li>
 
@@ -109,13 +108,16 @@
                             </div>
                             <!-- navbar-collapse -->
                         </nav>
+
                         <!-- END: Navigation -->
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- header-area end -->
     </header>
+    
     <!-- header end -->
     <div>
         @RenderBody()

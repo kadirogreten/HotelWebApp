@@ -5,62 +5,50 @@
     Layout = "~/Views/Shared/_Panel.cshtml";
 }
 
-<h2>Create</h2>
 
 
 @*@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+    {
+        @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Room</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.RoomNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.RoomNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RoomNumber, "", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            <h4>Room</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.RoomNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.RoomNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RoomNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Floor, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Floor, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Floor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
             </div>
         </div>
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Floor, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Floor, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Floor, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}*@
-
-
-
-
-
-
-
-
-
-
--------------------------
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
 
 
 
@@ -68,12 +56,11 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Room Form</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Room Create</li>
+                    <li class="breadcrumb-item active">General Form</li>
                 </ol>
             </div>
         </div>
@@ -89,48 +76,38 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Room oluştur</h3>
+                        <h3 class="card-title">Oda oluştur</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
 
-                    @using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
 
-                        <div class="form-horizontal">
-                            <h4>Room</h4>
-                            <hr />
+                    @using (Html.BeginForm("create", "room", FormMethod.Post, new { enctype = "multipart/form-data", role = "form" }))
+                    {
+
+                        @Html.AntiForgeryToken()
+                        <div class="card-body">
+
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="form-group">
-                                @Html.LabelFor(model => model.RoomNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.RoomNumber, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.RoomNumber, "", new { @class = "text-danger" })
-                                </div>
+                                <label for="exampleInputEmail1">Room Number</label>
+                                @Html.EditorFor(model => model.RoomNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.RoomNumber, "", new { @class = "text-danger" })
                             </div>
-
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Floor, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Floor, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Floor, "", new { @class = "text-danger" })
-                                </div>
+                                <label for="exampleInputPassword1">Floor</label>
+                                @Html.EditorFor(model => model.Floor, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Floor, "", new { @class = "text-danger" })
                             </div>
 
 
+                        </div>
+                        <!-- /.card-body -->
 
-
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Create" class="btn btn-default" />
-                                </div>
-                            </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary" type="submit">Submit</button>
                         </div>
                     }
-                    <!-- /.card-body -->
-
-
 
                 </div>
                 <!-- /.card -->
@@ -142,10 +119,6 @@
         <!-- /.row -->
     </div><!-- /.container-fluid -->
 </section>
-
-
-
-
 
 
 @section Scripts {

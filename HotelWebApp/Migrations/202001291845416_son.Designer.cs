@@ -7,13 +7,13 @@ namespace HotelWebApp.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class slider : IMigrationMetadata
+    public sealed partial class son : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(slider));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(son));
         
         string IMigrationMetadata.Id
         {
-            get { return "202001021635347_slider"; }
+            get { return "202001291845416_son"; }
         }
         
         string IMigrationMetadata.Source
