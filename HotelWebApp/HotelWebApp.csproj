@@ -137,21 +137,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201912261533220_ilk.cs" />
-    <Compile Include="Migrations\201912261533220_ilk.designer.cs">
-      <DependentUpon>201912261533220_ilk.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912261625231_rs.cs" />
-    <Compile Include="Migrations\201912261625231_rs.designer.cs">
-      <DependentUpon>201912261625231_rs.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001021635347_slider.cs" />
-    <Compile Include="Migrations\202001021635347_slider.designer.cs">
-      <DependentUpon>202001021635347_slider.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001281658040_ilk1.cs" />
-    <Compile Include="Migrations\202001281658040_ilk1.designer.cs">
-      <DependentUpon>202001281658040_ilk1.cs</DependentUpon>
+    <Compile Include="Migrations\202001291845416_son.cs" />
+    <Compile Include="Migrations\202001291845416_son.designer.cs">
+      <DependentUpon>202001291845416_son.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -2119,20 +2107,6 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201912261533220_ilk.resx">
-      <DependentUpon>201912261533220_ilk.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912261625231_rs.resx">
-      <DependentUpon>201912261625231_rs.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001021635347_slider.resx">
-      <DependentUpon>202001021635347_slider.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001281658040_ilk1.resx">
-      <DependentUpon>202001281658040_ilk1.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <TypeScriptCompile Include="Panel\plugins\fullcalendar-bootstrap\main.d.ts" />
     <TypeScriptCompile Include="Panel\plugins\fullcalendar-daygrid\main.d.ts" />
     <TypeScriptCompile Include="Panel\plugins\fullcalendar-interaction\main.d.ts" />
@@ -2142,6 +2116,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202001291845416_son.resx">
+      <DependentUpon>202001291845416_son.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
